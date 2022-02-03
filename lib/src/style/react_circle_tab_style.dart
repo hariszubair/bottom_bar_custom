@@ -47,24 +47,27 @@ class ReactCircleTabStyle extends InnerBuilder {
     if (active) {
       final item = items[index];
       return TransitionContainer.scale(
-        data: index,
-        curve: curve,
-        child: Container(
-          // necessary otherwise the badge will not large enough
-          width: style.layoutSize,
-          height: style.layoutSize,
-          margin: EdgeInsets.all(margin),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: active ? activeColor : color,
-          ),
-          child: BlendImageIcon(
-            active ? item.activeIcon ?? item.icon : item.icon,
-            size: style.activeIconSize,
-            color: item.blend ? backgroundColor : null,
-          ),
-        ),
-      );
+          data: index,
+          curve: curve,
+          child: Padding(
+            padding: const EdgeInsets.all(4),
+            child: Container(
+              // necessary otherwise the badge will not large enough
+              width: style.layoutSize,
+              height: style.layoutSize,
+              margin: EdgeInsets.all(margin),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: active ? activeColor : color,
+              ),
+              child: BlendImageIcon(
+                active ? item.activeIcon ?? item.icon : item.icon,
+                size: style.activeIconSize,
+                color: item.blend ? backgroundColor : null,
+                size: 20,
+              ),
+            ),
+          ));
     }
     var textStyle = style.textStyle(color, item.fontFamily);
     var noLabel = style.hideEmptyLabel && hasNoText(item);
@@ -72,6 +75,7 @@ class ReactCircleTabStyle extends InnerBuilder {
       BlendImageIcon(
         active ? item.activeIcon ?? item.icon : item.icon,
         color: item.blend ? color : null,
+        size: 20,
       ),
     ];
     if (!noLabel) {
